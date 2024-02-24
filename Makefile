@@ -30,7 +30,13 @@ ARGV_EXE := argv.exe
 RAND_SRC := rand.cpp
 RAND_EXE := rand.exe
 
-SRCS := $(NAMESPACE_SRC) $(SCOPE_SRC) $(STRING_SRC) $(CLASS_SRC) $(FILEIO_SRC) $(QUESTION0_SRC) test_hello.cpp
+ARR3D_SRC := array3d.cpp
+ARR3D_EXE := array3d.exe
+
+MEDIAN_SRC := median.cpp
+MEDIAN_EXE := median.exe
+
+SRCS := $(NAMESPACE_SRC) $(SCOPE_SRC) $(STRING_SRC) $(CLASS_SRC) $(FILEIO_SRC) $(QUESTION0_SRC) $(HELLO_SRC) $(RAND_SRC) $(ARR3D_SRC) $(MEDIAN_SRC)
 OBJS := $(SRCS:.cpp=.o)
 
 .PHONY: testall name test-name scope test-scope string test-string class test-class fileio test-fileio memory test-memory hello test-hello argv test-argv rand test-rand
@@ -55,7 +61,7 @@ help:
 
 hello: hello.o
 	@$(CPP) $@.o -o $@.exe
-test-hello:
+test-hello: hello
 	@echo '=== $@ ==='
 	@./$(HELLO_EXE)
 
@@ -113,6 +119,17 @@ test-rand: rand
 	@echo '=== $@ ==='
 	@./$(RAND_EXE)
 
+array3d: array3d.o
+	@$(CPP) $@.o -o $@.exe
+test-array3d: array3d
+	@echo '=== $@ ==='
+	@./$(ARR3D_EXE)
+
+median: median.o
+	@$(CPP) $@.o -o $@.exe
+test-median: median
+	@echo '=== $@ ==='
+	@./$(MEDIAN_EXE)
 
 testall: test-name test-string test-scope test-class test-fileio test-q0 rand test-rand
 
@@ -128,3 +145,5 @@ clean:
 	rm -f $(MEMORY_EXE)
 	rm -f $(ARGV_EXE)
 	rm -f $(RAND_EXE)
+	rm -f $(ARR3D_EXE)
+	rm -f $(MEDIAN_EXE)
